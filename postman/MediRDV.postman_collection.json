@@ -1,0 +1,332 @@
+{
+  "info": {
+    "name": "MediRDV API",
+    "_postman_id": "6f63d1be-7ce3-4d75-a11c-52a214e93680",
+    "description": "Collection Postman pour tester le backend MediRDV.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4000/api"
+    },
+    {
+      "key": "patientToken",
+      "value": ""
+    },
+    {
+      "key": "doctorToken",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/health"
+      }
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login Patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"patient@medirdv.tn\",\n  \"password\": \"patient123\",\n  \"role\": \"patient\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Login Docteur",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"doctor@medirdv.tn\",\n  \"password\": \"doctor123\",\n  \"role\": \"doctor\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Inscription Patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"Nadia\",\n  \"last_name\": \"Khelifi\",\n  \"email\": \"nadia.khelifi@example.com\",\n  \"password\": \"secret123\",\n  \"phone\": \"20 123 456\",\n  \"city\": \"Sfax\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/register/patient"
+          }
+        },
+        {
+          "name": "Inscription Docteur",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"Yasmine\",\n  \"last_name\": \"Trabelsi\",\n  \"email\": \"yasmine.trabelsi@example.com\",\n  \"password\": \"secret123\",\n  \"phone\": \"24 321 000\",\n  \"city\": \"Sousse\",\n  \"specialty\": \"Dermatologue\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/register/doctor"
+          }
+        },
+        {
+          "name": "Profil connecté",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{patientToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/me"
+          }
+        },
+        {
+          "name": "Reset password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{patientToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"patient123\",\n  \"newPassword\": \"patient456\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/reset-password"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Docteurs / Patients",
+      "item": [
+        {
+          "name": "Liste publique docteurs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/public/doctors"
+          }
+        },
+        {
+          "name": "Recherche docteurs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{patientToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/doctors?search=Amine"
+          }
+        },
+        {
+          "name": "Recherche patients",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{doctorToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/patients?search=Salim"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rendez-vous Patient",
+      "item": [
+        {
+          "name": "Mes rendez-vous",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{patientToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/appointments"
+          }
+        },
+        {
+          "name": "Créer rendez-vous",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{patientToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"doctor_id\": 2,\n  \"appointment_date\": \"2026-04-15\",\n  \"appointment_time\": \"14:00\",\n  \"reason\": \"Consultation de suivi\",\n  \"notes\": \"Douleurs récentes\"\n}"
+            },
+            "url": "{{baseUrl}}/appointments"
+          }
+        },
+        {
+          "name": "Modifier rendez-vous patient",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{patientToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointment_date\": \"2026-04-18\",\n  \"appointment_time\": \"15:00\",\n  \"reason\": \"Consultation replanifiée\"\n}"
+            },
+            "url": "{{baseUrl}}/appointments/1"
+          }
+        },
+        {
+          "name": "Annuler rendez-vous patient",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{patientToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/appointments/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rendez-vous Docteur",
+      "item": [
+        {
+          "name": "Mes rendez-vous côté docteur",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{doctorToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/appointments"
+          }
+        },
+        {
+          "name": "Modifier rendez-vous docteur",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{doctorToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointment_date\": \"2026-04-20\",\n  \"appointment_time\": \"10:00\",\n  \"notes\": \"Report par le médecin\"\n}"
+            },
+            "url": "{{baseUrl}}/appointments/1"
+          }
+        },
+        {
+          "name": "Confirmer rendez-vous",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{doctorToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"confirmed\"\n}"
+            },
+            "url": "{{baseUrl}}/appointments/1/status"
+          }
+        },
+        {
+          "name": "Rejeter rendez-vous",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{doctorToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"rejected\"\n}"
+            },
+            "url": "{{baseUrl}}/appointments/1/status"
+          }
+        }
+      ]
+    }
+  ]
+}
