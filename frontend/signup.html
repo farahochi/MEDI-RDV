@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediRDV | Inscription</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script type="module" src="js/signup.js"></script>
+</head>
+
+<body>
+  <main class="authPage">
+    <div class="container authLayout">
+      <section class="brandPanel">
+        <img src="assets/logo.png" alt="MediRDV">
+        <span class="badge">Nouveau compte</span>
+        <h1>Inscription patient ou docteur</h1>
+        <p class="muted">
+          Créez votre compte. Le rendez-vous se prend ensuite dans le dashboard patient,
+          sans champs inutiles comme login ou mot de passe dans le formulaire de rendez-vous.
+        </p>
+      </section>
+
+      <section class="authCard">
+        <div class="roleSwitcher">
+          <button type="button" class="btn roleTab is-active" data-role-tab="patient">Compte patient</button>
+          <button type="button" class="btn roleTab" data-role-tab="doctor">Compte docteur</button>
+        </div>
+
+        <form id="signupForm" class="formGrid">
+          <input id="signupRole" type="hidden" value="patient" />
+
+          <div class="formGrid formGrid--two">
+            <label>
+              Prénom
+              <input id="firstName" type="text" required />
+            </label>
+            <label>
+              Nom
+              <input id="lastName" type="text" required />
+            </label>
+          </div>
+
+          <div class="formGrid formGrid--two">
+            <label>
+              Email
+              <input id="email" type="email" required />
+            </label>
+            <label>
+              Mot de passe
+              <input id="password" type="password" minlength="6" required />
+            </label>
+          </div>
+
+          <div class="formGrid formGrid--two">
+            <label>
+              Téléphone
+              <input id="phone" type="text" required />
+            </label>
+            <label>
+              Ville
+              <input id="city" type="text" required />
+            </label>
+          </div>
+
+          <div id="specialtyBlock" hidden>
+            <label>
+              Spécialité
+              <input id="specialty" type="text" placeholder="Ex: Cardiologue" />
+            </label>
+          </div>
+
+          <div class="formActions">
+            <button class="btn btn--primary" type="submit">Créer le compte</button>
+            <a class="btn btn--ghost" href="login.html">Retour à la connexion</a>
+          </div>
+
+          <p id="signupMessage" class="message"></p>
+        </form>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

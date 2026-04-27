@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediRDV | Accueil</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script type="module" src="js/index.js"></script>
+</head>
+
+<body>
+  <header class="pageHeader">
+    <div class="container pageHeader__row">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.png" alt="MediRDV">
+        <span>MediRDV</span>
+      </a>
+      <nav class="navLinks">
+        <a class="btn btn--ghost" href="#services">Services</a>
+        <a class="btn btn--ghost" href="#search">Rechercher un docteur</a>
+        <a class="btn btn--ghost" href="signup.html">Inscription</a>
+        <a class="btn btn--primary" href="login.html">Connexion</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container heroGrid">
+        <div class="heroCopy">
+          <span class="badge">Plateforme de rendez-vous médicaux</span>
+          <h1>Patient et docteur sur une même plateforme claire et sécurisée</h1>
+          <p>
+            Cette version supprime le compte démo et propose une vraie séparation entre espace patient
+            et espace docteur, avec authentification, inscription, changement de mot de passe,
+            consultation et gestion des rendez-vous.
+          </p>
+
+          <div class="heroActions">
+            <a class="btn btn--primary" href="login.html">Se connecter</a>
+            <a class="btn btn--ghost" href="signup.html">Créer un compte</a>
+          </div>
+
+          <div class="statsGrid">
+            <article class="statCard">
+              <strong>2 rôles</strong>
+              <span class="muted">Patient et docteur</span>
+            </article>
+            <article class="statCard">
+              <strong>CRUD RDV</strong>
+              <span class="muted">Créer, modifier, annuler, confirmer</span>
+            </article>
+            <article class="statCard">
+              <strong>Recherche</strong>
+              <span class="muted">Recherche de docteurs et patients</span>
+            </article>
+          </div>
+        </div>
+
+        <aside class="heroSearchCard glassCard" id="search">
+          <h2>Recherche publique de docteurs</h2>
+          <form id="publicDoctorSearchForm" class="formGrid">
+            <label>
+              Nom, ville ou spécialité
+              <input id="doctorSearchInput" type="text" placeholder="Ex: cardiologue, Tunis, Amine..." />
+            </label>
+            <button class="btn btn--primary" type="submit">Rechercher</button>
+            <p id="doctorSearchMessage" class="message"></p>
+          </form>
+          <div id="doctorResults" class="resultsList"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <h2>Fonctionnalités principales</h2>
+        <div class="cardsGrid">
+          <article>
+            <h3>Compte patient</h3>
+            <p class="muted">Consulter ses rendez-vous, ajouter un nouveau rendez-vous, modifier sous condition et annuler selon les règles métier.</p>
+          </article>
+          <article>
+            <h3>Compte docteur</h3>
+            <p class="muted">Consulter les rendez-vous des patients, reporter un rendez-vous, confirmer ou rejeter une demande.</p>
+          </article>
+          <article>
+            <h3>Sécurité et cohérence</h3>
+            <p class="muted">Authentification par token, base PostgreSQL, API Express et frontend connecté via fetch.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 MediRDV — projet frontend adapté à partir du ZIP fourni.</div>
+  </footer>
+</body>
+</html>

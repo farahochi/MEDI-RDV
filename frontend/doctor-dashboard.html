@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediRDV | Espace docteur</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script type="module" src="js/doctor.js"></script>
+</head>
+
+<body>
+  <header class="pageHeader">
+    <div class="container pageHeader__row">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.png" alt="MediRDV">
+        <span>MediRDV</span>
+      </a>
+      <nav class="navLinks">
+        <a class="btn btn--ghost" href="reset-password.html">Changer le mot de passe</a>
+        <button class="btn btn--danger" type="button" data-action="logout">Déconnexion</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="dashboardPage">
+    <div class="container dashboardGrid">
+      <aside class="sidebarCard">
+        <div class="userAvatar">D</div>
+        <h2 data-user-name>Docteur</h2>
+        <p class="muted" data-user-email></p>
+        <div class="infoList">
+          <div class="infoItem"><span>Rôle</span><strong data-user-role></strong></div>
+          <div class="infoItem"><span>Ville</span><strong data-user-city></strong></div>
+          <div class="infoItem"><span>Spécialité</span><strong data-user-specialty></strong></div>
+        </div>
+      </aside>
+
+      <section class="contentStack">
+        <article class="glassCard">
+          <span class="badge">Espace docteur</span>
+          <h1 id="doctorWelcomeText">Bonjour docteur</h1>
+          <p class="muted">
+            Vous pouvez consulter les rendez-vous des patients, modifier les informations d’un rendez-vous,
+            le reporter, puis le confirmer ou le rejeter.
+          </p>
+        </article>
+
+        <article class="glassCard">
+          <h2 id="doctorFormTitle">Modifier un rendez-vous sélectionné</h2>
+          <form id="doctorEditForm" class="formGrid">
+            <div class="formGrid formGrid--two">
+              <label>
+                Nouvelle date
+                <input id="editAppointmentDate" type="date" required />
+              </label>
+              <label>
+                Nouvelle heure
+                <input id="editAppointmentTime" type="time" required />
+              </label>
+            </div>
+
+            <label>
+              Motif
+              <input id="editReason" type="text" required />
+            </label>
+
+            <label>
+              Notes
+              <textarea id="editNotes"></textarea>
+            </label>
+
+            <div class="formActions">
+              <button id="doctorSubmitBtn" class="btn btn--primary" type="submit">Enregistrer</button>
+              <button id="doctorCancelEditBtn" class="btn btn--ghost" type="button" hidden>Annuler</button>
+            </div>
+
+            <p id="doctorEditMessage" class="message"></p>
+          </form>
+        </article>
+
+        <article class="tableCard">
+          <h2>Rendez-vous des patients</h2>
+          <form id="doctorFilterForm" class="formGrid">
+            <div class="formGrid formGrid--two">
+              <label>
+                Recherche
+                <input id="doctorSearchInput" type="text" placeholder="Nom patient, email, motif..." />
+              </label>
+              <label>
+                Statut
+                <select id="statusFilter">
+                  <option value="">Tous</option>
+                  <option value="pending">En attente</option>
+                  <option value="confirmed">Confirmé</option>
+                  <option value="rejected">Rejeté</option>
+                  <option value="cancelled">Annulé</option>
+                </select>
+              </label>
+            </div>
+            <div class="formActions">
+              <button class="btn btn--primary" type="submit">Filtrer</button>
+            </div>
+          </form>
+
+          <div class="tableWrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Email</th>
+                  <th>Date</th>
+                  <th>Heure</th>
+                  <th>Motif</th>
+                  <th>Notes</th>
+                  <th>Statut</th>
+                  <th>Téléphone</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="doctorAppointmentsBody"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="glassCard">
+          <h2>Recherche de patients</h2>
+          <form id="patientSearchForm" class="formGrid">
+            <label>
+              Rechercher un patient
+              <input id="patientSearchInput" type="text" placeholder="Nom, email, ville..." />
+            </label>
+            <div class="formActions">
+              <button class="btn btn--primary" type="submit">Rechercher</button>
+            </div>
+            <p id="patientSearchMessage" class="message"></p>
+          </form>
+
+          <div id="patientSearchResults" class="resultsList"></div>
+        </article>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
